@@ -1,4 +1,6 @@
-// <journal-entry> custom web component
+
+// <journal-entry> custom web 
+// export default class JournalEntry extends HTMLElement {
 class JournalEntry extends HTMLElement {
   constructor() {
     super();
@@ -74,6 +76,16 @@ class JournalEntry extends HTMLElement {
     
     // CODE GOES HERE
 
+    // // don't need to do all these because of the cloning thing in line 57. It appends for you (I guess...).
+    // var title = document.createElement("h2");
+    // title.setAttribute("class", "entry-title");
+    // title.textContent = entry.title;
+    // A.appendChild(B);
+
+    this.shadowRoot.querySelector(".entry-title").textContent = entry.title;
+    this.shadowRoot.querySelector(".entry-date").textContent = entry.date;
+    this.shadowRoot.querySelector(".entry-content").textContent = entry.content;
+
     if (entry.image) {
       let entryImage;
       /*
@@ -84,11 +96,11 @@ class JournalEntry extends HTMLElement {
        */
 
       // CODE GOES HERE vvv
-
-
-
-
-
+      entryImage = document.createElement("img");
+      entryImage.setAttribute("class", "entry-image");
+      entryImage.setAttribute("src", entry.image.src);
+      entryImage.setAttribute("alt", entry.image.alt);
+      this.shadowRoot.querySelector("article").appendChild(entryImage);
       // CODE GOES HERE ^^^
 
       /* ------------- do not edit this code, it is for your debugging purposes ------------- */
@@ -110,12 +122,12 @@ class JournalEntry extends HTMLElement {
        */
 
       // CODE GOES HERE vvv
-
-
-
-
-
-
+      entryAudio = document.createElement("audio");
+      entryAudio.setAttribute("class", "entry-audio");
+      entryAudio.setAttribute("src", entry.audio);
+      entryAudio.controls = true;
+      entryAudio.load();
+      this.shadowRoot.querySelector("article").appendChild(entryAudio);
       // CODE GOES HERE ^^^
       
 

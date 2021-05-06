@@ -1,5 +1,5 @@
 // script.js
-
+// import JournalEntry from "../components/journal-entry.js"
 window.logCheckpoints = true // set to true/false to add/remove checkpoint logs to clear room for your own debugging
 
 
@@ -16,27 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
    * the current entry for each journal-entry element.
    */
 
-  let url = ""  // SET URL 
+  let url = "https://cse110lab6.herokuapp.com/entries"  // SET URL 
 
   fetch(url)
-    .then( /* FILL IN RESPONSE HANDLING HERE */ )
+    .then(response => response.json())
+    
     .then(entries => {
+      // console.log(entries);
       entries.forEach((entry) => {
        
         let newPost;  
 
-
         // CODE GOES HERE vvv
-        
+        newPost = document.createElement("journal-entry"); // this is similar to line 32, with all the export & import
+        // newPost = new JournalEntry();
+        newPost.entry = entry;    // calling the 'get entry()' in JournalEntry and set it to the current entry
 
-
-
-
-
-
+        var element = document.querySelector("main");
+        element.appendChild(newPost);
 
         // CODE GOES HERE ^^^
-
 
 
         /* ------------- do not edit this code, it is for your debugging purposes ------------- */
